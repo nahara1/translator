@@ -106,7 +106,7 @@ Author: Nahara Melo
 <script type="text/javascript">
 
     function translateLanguage() {
-        $.getJSON("http://mymemory.translated.net/api/get?q=" + $("#quoteIn").val() +
+        $.getJSON("https://mymemory.translated.net/api/get?q=" + $("#quoteIn").val() +
             "&langpair=" + "en|" + $("#lang").val()).done(function (json) {
                 $("#quoteOut").val(json.responseData.translatedText);
             })
