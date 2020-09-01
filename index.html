@@ -1,1 +1,124 @@
+<!-- Narrara -->
+<!--
+Project: Translation Tool
+Author: Nahara Melo
+-->
 
+
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+    <meta charset="utf-8" />
+    <title>Translator</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Encode+Sans+Expanded:wght@300&display=swap" rel="stylesheet">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+</head>
+<style>
+    div,
+    option {
+        font-family: 'Encode Sans Expanded', sans-serif;
+    }
+
+
+    .custom-lang {
+        font-family: "Roboto Slab", serif;
+    }
+
+    input {
+        height: 27%;
+        color: black;
+        font-size: 21px;
+        padding: 1px 5px;
+        box-sizing: border-box;
+        margin: 8px 10px;
+        display: inline-block;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+    }
+
+    button {
+        width: 23%;
+        height: 27px;
+        font-size: 15px;
+        color: black;
+        display: inline-block;
+        font-family: "Roboto Slab", serif;
+        background-color: white;
+        border-color: black;
+        margin-left: 14px;
+        left: 50px;
+        padding-left: 10px;
+        text-align: center;
+        text-anchor: middle;
+    }
+
+    #quoteIn {
+        placeholder: "type word...";
+    }
+
+    #translation {
+        height: 200px;
+        width: 50%;
+        background-color: white;
+        box-sizing: border-box;
+        padding: 12px 20px;
+
+    }
+
+    footer {
+        padding: 12px 20px;
+    }
+
+
+    @media (max-width:961px) {
+
+        /* tablet, landscape iPad, lo-res laptops, desktops */
+        button {
+            position: fixed;
+        }
+    }
+</style>
+
+<body>
+
+    <div class="custom-lang" style="width:200px;">
+        <select id="lang">
+            <option value="0">Select Language</option>
+            <option value="fr" onclick="selectLang()" id="fr">French</option>
+            <option value="de" onselect="selectLang()" id="de">German</option>
+            <option value="it" onselect="selectLang()" id="it">Italian</option>
+            <option value="pt" onselect="selectLang()" id="pt">Portuguese</option>
+        </select>
+    </div>
+    <div id="translation">
+        <input type="text" id="quoteIn" />
+        <input type="text" id="quoteOut" readonly="true">
+        <!-- <input type="text" id="quoteOut2" readonly="true"> -->
+        <br>
+        <button onclick="translateLanguage()">Translate</button>
+
+    </div>
+    <footer>Built with <i class="fa fa-heart"></i> by <b>Nahara</b></footer>
+</body>
+
+<script type="text/javascript">
+
+    function translateLanguage() {
+        $.getJSON("http://mymemory.translated.net/api/get?q=" + $("#quoteIn").val() +
+            "&langpair=" + "en|" + $("#lang").val()).done(function (json) {
+                $("#quoteOut").val(json.responseData.translatedText);
+            })
+            .fail(function () {
+                alert("Error");
+            });
+    }
+
+
+
+
+
+</script>
+
+</html>
